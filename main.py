@@ -1,6 +1,6 @@
 import sys
 
-from game_functions import general_functions
+from game_functions import general_functions, handle_log
 from game_functions import get_screen
 
 
@@ -9,8 +9,6 @@ try:
     param1 = sys.argv[1]
 except IndexError as message:
     print()
-
-
 try:
     if param1 == 'darkforces':
         param2 = sys.argv[2]
@@ -23,6 +21,17 @@ try:
     if param1 == 'level':
         print(get_screen.get_dark_forces_level())
     # general_functions.select_level(30)
+    if param1 == 'worldboss':
+        try:
+            minutes = int(sys.argv[2])
+            seconds = int(sys.argv[3])
+            general_functions.attack_wordl_boss(minutes, seconds)
+        except IndexError:
+            print('É necessário informar os parâmetros: Minutos e Segundos.')
+        except ValueError:
+            print('É necessário que os parâmetros minutos e segundos sejam números inteiros')
+    if param1 == 'readlog':
+        handle_log.read_log()
     else:
         raise KeyError
 except NameError as message:
@@ -40,5 +49,7 @@ except KeyError as message:
     print('level      - Obtém o nível da força das trevas a ser atacada.')
 except KeyboardInterrupt:
     print('*** ENCERRANDO! ***')
+
+
 
 # get_screen.get_vit_value()

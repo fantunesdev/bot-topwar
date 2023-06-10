@@ -1,8 +1,9 @@
+import datetime
 import random
 
 import pyautogui
 
-from game_functions import get_screen
+from game_functions import get_screen, handle_log
 
 buttons = {
     'magnifier': (756, 1018),
@@ -168,3 +169,31 @@ def select_level(iterations: int):
             print('condição 2')
             level = int(get_screen.get_dark_forces_level())
             pyautogui.click(buttons['level']['increase'])
+
+
+def attack_wordl_boss(minutes: int, seconds: int):
+    pyautogui.sleep(2)
+    for i in range(5):
+        try:
+            x, y = get_screen.get_wordl_boss_position()
+            pyautogui.click(x, y)
+            pyautogui.sleep(1)
+            pyautogui.click(960, 767)  # botão pesquisa rápida
+            pyautogui.sleep(1)
+            pyautogui.click(957, 505)  # Chefão
+            pyautogui.sleep(1)
+            pyautogui.click(1056, 894)  #botão atacar
+            pyautogui.sleep(1)
+            pyautogui.click(1483, 920)  # Diana squad
+            pyautogui.sleep(1)
+            pyautogui.click(952, 516)  # Marchar
+            message = {
+                'text': 'Chefão Mundial',
+                'action': 'Ataque'
+            }
+            handle_log.write_log(message)
+            time = (minutes * 60 + seconds) * 2 + 3
+            pyautogui.sleep(time)
+        except TypeError:
+            print('O chefão não foi encontrado.')
+            break

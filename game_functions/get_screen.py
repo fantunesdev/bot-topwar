@@ -29,3 +29,16 @@ def get_dark_forces_level():
     text = pytesseract.image_to_string(image)
     level_value = text.split(':')[1].split('.')[0].split('°')[0]
     return level_value
+
+
+def get_wordl_boss_position():
+    pyautogui.sleep(2)
+    for i in range(5):
+        try:
+            wordl_boss_button = pyautogui.locateOnScreen('img/worldboss.png')
+            left, top, width, height = wordl_boss_button
+            return left + 15, top + 15
+        except TypeError:
+            return None
+
+
