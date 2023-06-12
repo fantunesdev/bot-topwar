@@ -36,9 +36,16 @@ def get_wordl_boss_position():
     for i in range(5):
         try:
             wordl_boss_button = pyautogui.locateOnScreen('img/worldboss.png')
-            left, top, width, height = wordl_boss_button
-            return left + 15, top + 15
+            x, y, width, height = wordl_boss_button
+            return x + 15, y + 15
         except TypeError:
             return None
 
 
+def calculate_position():
+    pyautogui.sleep(2)
+    test = pyautogui.screenshot(region=(60, 460, 120, 20))
+    test.save('img/test.png')
+    image = cv2.imread('img/test.png')
+    text = pytesseract.image_to_string(image)
+    print(text)

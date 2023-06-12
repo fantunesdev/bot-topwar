@@ -1,8 +1,10 @@
 import datetime
+import math
 import random
 
 import pyautogui
 
+from config import base_location
 from game_functions import get_screen, handle_log
 
 buttons = {
@@ -86,10 +88,12 @@ def free_gem(clicks: int):
 
 def attack_dark_forces(vit: int):
     pyautogui.sleep(2)
-    recharges = 3
+    recharges = 5
+    print(f'Iniciando ataque com {recharges} recargas.')
     for i in range(recharges):
         if vit < 25:
             add_vit_value = 10
+            print(f'A VIT acabou. Fazendo a recarga {i + 1}.')
             restore_vit(add_vit_value)
             vit += add_vit_value
             pyautogui.click(1705, 350)
@@ -122,12 +126,12 @@ def attack_dark_forces(vit: int):
                 counter += 1
                 if vit < 25:
                     break
-        print(f'Iteração: {i + 1}')
 
     print('Fim do pograma.')
 
 
 def restore_vit(portion: int):
+    print(f'Tamanho da recarga: {portion}.')
     if portion in (10, 50):
         portion_button = {
             '10': (825, 632),
@@ -182,7 +186,7 @@ def attack_wordl_boss(minutes: int, seconds: int):
             pyautogui.sleep(1)
             pyautogui.click(957, 505)  # Chefão
             pyautogui.sleep(1)
-            pyautogui.click(1056, 894)  #botão atacar
+            pyautogui.click(1056, 894)  # botão atacar
             pyautogui.sleep(1)
             pyautogui.click(1483, 920)  # Diana squad
             pyautogui.sleep(1)
@@ -197,3 +201,23 @@ def attack_wordl_boss(minutes: int, seconds: int):
         except TypeError:
             print('O chefão não foi encontrado.')
             break
+
+
+def calculate_time(x: int, y: int):
+    base = base_location
+
+    velocity = 2.325807970587723
+    diana_squad_velocity = velocity * 1.23
+
+    target = {
+        'x': x,
+        'y': y
+    }
+
+    target_x = base['x'] - target['x']
+    target_y = base['y'] - target['y']
+    distance = (target_x ** 2 + target_y ** 2) ** (1 / 2)
+    time = math.ceil(distance / diana_squad_velocity)
+
+    return time
+

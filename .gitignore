@@ -1,4 +1,10 @@
-img/*
+img/dark_forces_level.png
+img/greyscale.png
+img/greyscale1.png
+img/teste.png
+img/vit_status.png
+img/vit_status1.png
+bot.log
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,pycharm,visualstudiocode

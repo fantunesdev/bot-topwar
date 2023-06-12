@@ -21,7 +21,7 @@ try:
     if param1 == 'level':
         print(get_screen.get_dark_forces_level())
     # general_functions.select_level(30)
-    if param1 == 'worldboss':
+    if param1 == 'boss':
         try:
             minutes = int(sys.argv[2])
             seconds = int(sys.argv[3])
@@ -30,10 +30,12 @@ try:
             print('É necessário informar os parâmetros: Minutos e Segundos.')
         except ValueError:
             print('É necessário que os parâmetros minutos e segundos sejam números inteiros')
+    if param1 == 'relatory':
+        print(general_functions.calculate_time(464, 292))
     if param1 == 'readlog':
         handle_log.read_log()
-    else:
-        raise KeyError
+    # else:
+    #     raise KeyError
 except NameError as message:
     if 'param1' == message.name:
         print('*** ERRO *** O parâmetro 1 é obrigatório.\n')
@@ -50,6 +52,3 @@ except KeyError as message:
 except KeyboardInterrupt:
     print('*** ENCERRANDO! ***')
 
-
-
-# get_screen.get_vit_value()
