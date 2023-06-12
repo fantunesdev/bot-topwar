@@ -23,11 +23,7 @@ try:
     # general_functions.select_level(30)
     if param1 == 'boss':
         try:
-            minutes = int(sys.argv[2])
-            seconds = int(sys.argv[3])
-            general_functions.attack_wordl_boss(minutes, seconds)
-        except IndexError:
-            print('É necessário informar os parâmetros: Minutos e Segundos.')
+            general_functions.attack_wordl_boss()
         except ValueError:
             print('É necessário que os parâmetros minutos e segundos sejam números inteiros')
     if param1 == 'relatory':

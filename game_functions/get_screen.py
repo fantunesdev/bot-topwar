@@ -43,12 +43,31 @@ def get_wordl_boss_position():
             return
 
 
-def get_map_position():
+def get_map_position(target: str):
+    print(target)
+    darkforces = {
+        'center': (960, 591),
+        'favorites': (1107, 193),
+        'rival': (1090, 553),
+        'coordinates': (1069, 380, 110, 25)
+    }
+
+    boss = {
+        'center': (951, 533),
+        'favorites': (1145, 618),
+        'rival': (),
+        'coordinates': (1090, 380, 80, 25)
+    }
+
+    if target == 'boss':
+        selected = boss
+    else:
+        selected = darkforces
 
     # Salvando o relatório dos favoritos
-    pyautogui.click(960, 591)  # darkforces
+    pyautogui.click(selected['center'])  # center
     pyautogui.sleep(1)
-    pyautogui.click(1107, 193)  # Favoritos
+    pyautogui.click(selected['favorites'])  # Favoritos
     pyautogui.sleep(1)
     pyautogui.click(1090, 553)  # Rival
     pyautogui.sleep(1)
@@ -60,10 +79,13 @@ def get_map_position():
     pyautogui.sleep(1)
 
     # Lendo a posição
-    test = pyautogui.screenshot(region=(1069, 380, 110, 25))
+    test = pyautogui.screenshot(region=(selected['coordinates']))
     test.save('img/coordinates.png')
     image = cv2.imread('img/coordinates.png')
-    pure_text = pytesseract.image_to_string(image).split(' ')[1]
+    if target == 'darkforces':
+        pure_text = pytesseract.image_to_string(image).split(' ')[1].replace(':', '')  # darkforces
+    if target == 'boss':
+        pure_text = pytesseract.image_to_string(image)  # boss
     handle_text = re.sub('[^A-Za-z0-9]+', '', pure_text)
     words_list = handle_text.split('Y')
     x = int(words_list[0].replace('X', ''))

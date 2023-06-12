@@ -111,11 +111,10 @@ def attack_dark_forces(vit: int):
                 select_force(counter)
                 pyautogui.sleep(1)
                 pyautogui.click(buttons['search'])
-                # pyautogui.sleep(1)
-                # pyautogui.click(buttons['center'])
                 pyautogui.sleep(1)
-                x, y = get_screen.get_map_position()
-                time = calculate_time(x, y)
+                x, y = get_screen.get_map_position('darkforces')
+                time = calculate_time(x, y, 'darkforces')
+                print(f'O tempo de marcha: {time} segundos.')
                 pyautogui.click(buttons['search'])
                 pyautogui.sleep(1)
                 pyautogui.click(buttons['center'])
@@ -180,38 +179,42 @@ def select_level(iterations: int):
             pyautogui.click(buttons['level']['increase'])
 
 
-def attack_wordl_boss(minutes: int, seconds: int):
+def attack_wordl_boss():
     pyautogui.sleep(2)
-    for i in range(5):
+    for i in range(1):
         try:
             x, y = get_screen.get_wordl_boss_position()
-            pyautogui.click(x, y)
+            pyautogui.click(x, y)  # worldboss button position
             pyautogui.sleep(1)
             pyautogui.click(960, 767)  # botão pesquisa rápida
             pyautogui.sleep(1)
-            pyautogui.click(957, 505)  # Chefão
-            pyautogui.sleep(1)
-            pyautogui.click(1056, 894)  # botão atacar
-            pyautogui.sleep(1)
-            pyautogui.click(1483, 920)  # Diana squad
-            pyautogui.sleep(1)
-            pyautogui.click(952, 516)  # Marchar
-            message = {
-                'text': 'Chefão Mundial',
-                'action': 'Ataque'
-            }
-            handle_log.write_log(message)
-            time = (minutes * 60 + seconds) * 2 + 3
-            pyautogui.sleep(time)
+            x, y = get_screen.get_map_position('boss')
+            time = calculate_time(x, y, 'boss')
+            print(f'O tempo de marcha é de {time} segundos.')
+            # pyautogui.click(1056, 894)  # botão atacar
+            # pyautogui.sleep(1)
+            # pyautogui.click(1483, 920)  # Diana squad
+            # pyautogui.sleep(1)
+            # pyautogui.click(952, 516)  # Marchar
+            # message = {
+            #     'text': 'Chefão Mundial',
+            #     'action': 'Ataque'
+            # }
+            # handle_log.write_log(message)
+            # time = (minutes * 60 + seconds) * 2 + 3
+            # pyautogui.sleep(time)
         except TypeError:
             print('O chefão não foi encontrado.')
             break
 
 
-def calculate_time(x: int, y: int):
+def calculate_time(x: int, y: int, target: str):
     base = base_location
 
-    velocity = 2.325807970587723
+    if target == 'boss':
+        velocity = 1.59
+    else:
+        velocity = 2.325807970587723
     diana_squad_velocity = velocity * 1.23
 
     target = {
