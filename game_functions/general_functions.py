@@ -88,7 +88,8 @@ def free_gem(clicks: int):
 
 def attack_dark_forces(vit: int):
     pyautogui.sleep(2)
-    recharges = 2
+    recharges = 5
+    seconds_for_vit_bonus_recharge = 345
     print(f'Iniciando ataque com {recharges} recargas.')
     for i in range(recharges):
         if vit < 25:
@@ -181,28 +182,34 @@ def select_level(iterations: int):
 
 def attack_wordl_boss():
     pyautogui.sleep(2)
-    for i in range(1):
+    x, y = get_screen.get_wordl_boss_position()
+    pyautogui.click(x, y)  # worldboss button position
+    pyautogui.sleep(1)
+    pyautogui.click(960, 767)  # botão pesquisa rápida
+    pyautogui.sleep(1)
+    x, y = get_screen.get_map_position('boss')
+    time = calculate_time(x, y, 'boss')
+    print(f'O tempo de marcha é de {time} segundos.')
+    for i in range(5):
         try:
-            x, y = get_screen.get_wordl_boss_position()
-            pyautogui.click(x, y)  # worldboss button position
             pyautogui.sleep(1)
-            pyautogui.click(960, 767)  # botão pesquisa rápida
+            pyautogui.click(958, 522)  # Boss
             pyautogui.sleep(1)
-            x, y = get_screen.get_map_position('boss')
-            time = calculate_time(x, y, 'boss')
-            print(f'O tempo de marcha é de {time} segundos.')
-            # pyautogui.click(1056, 894)  # botão atacar
-            # pyautogui.sleep(1)
-            # pyautogui.click(1483, 920)  # Diana squad
-            # pyautogui.sleep(1)
-            # pyautogui.click(952, 516)  # Marchar
-            # message = {
-            #     'text': 'Chefão Mundial',
-            #     'action': 'Ataque'
-            # }
-            # handle_log.write_log(message)
-            # time = (minutes * 60 + seconds) * 2 + 3
-            # pyautogui.sleep(time)
+            pyautogui.click(1056, 894)  # botão atacar
+            pyautogui.sleep(1)
+            pyautogui.click(1483, 920)  # Diana squad
+            pyautogui.sleep(1)
+            pyautogui.click(952, 516)  # Marchar
+            pyautogui.sleep(time)
+            message = {
+                'text': 'Chefão Mundial',
+                'action': 'Ataque'
+            }
+            handle_log.write_log(message)
+            print(f'Atacou o Chefão! Retornando...')
+            pyautogui.sleep(time)
+            print('Chegou na base.')
+            pyautogui.sleep(4)
         except TypeError:
             print('O chefão não foi encontrado.')
             break
