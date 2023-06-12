@@ -31,7 +31,9 @@ try:
         except ValueError:
             print('É necessário que os parâmetros minutos e segundos sejam números inteiros')
     if param1 == 'relatory':
-        print(general_functions.calculate_time(464, 292))
+        position = get_screen.get_map_position()
+        print(position)
+        # print(general_functions.calculate_time(464, 292))
     if param1 == 'readlog':
         handle_log.read_log()
     # else:

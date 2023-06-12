@@ -88,11 +88,11 @@ def free_gem(clicks: int):
 
 def attack_dark_forces(vit: int):
     pyautogui.sleep(2)
-    recharges = 5
+    recharges = 2
     print(f'Iniciando ataque com {recharges} recargas.')
     for i in range(recharges):
         if vit < 25:
-            add_vit_value = 10
+            add_vit_value = 50
             print(f'A VIT acabou. Fazendo a recarga {i + 1}.')
             restore_vit(add_vit_value)
             vit += add_vit_value
@@ -111,6 +111,12 @@ def attack_dark_forces(vit: int):
                 select_force(counter)
                 pyautogui.sleep(1)
                 pyautogui.click(buttons['search'])
+                # pyautogui.sleep(1)
+                # pyautogui.click(buttons['center'])
+                pyautogui.sleep(1)
+                x, y = get_screen.get_map_position()
+                time = calculate_time(x, y)
+                pyautogui.click(buttons['search'])
                 pyautogui.sleep(1)
                 pyautogui.click(buttons['center'])
                 pyautogui.sleep(1)
@@ -121,8 +127,7 @@ def attack_dark_forces(vit: int):
                 pyautogui.click(buttons['attack'])
                 vit -= 15
                 print(f'VIT disponível: {vit}.')
-                pyautogui.sleep(350)
-                vit += 1
+                pyautogui.sleep(240 + (time * 2) + 2)
                 counter += 1
                 if vit < 25:
                     break
