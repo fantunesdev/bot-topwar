@@ -89,7 +89,9 @@ def free_gem(clicks: int):
 def attack_dark_forces(vit: int):
     pyautogui.sleep(2)
     recharges = 5
-    seconds_for_vit_bonus_recharge = 345
+    seconds_for_plus_1_vit = 345
+    plus_1_vit_counter = 1
+    initial_time = datetime.datetime.now()
     print(f'Iniciando ataque com {recharges} recargas.')
     for i in range(recharges):
         if vit < 25:
@@ -99,38 +101,49 @@ def attack_dark_forces(vit: int):
             vit += add_vit_value
             pyautogui.click(1705, 350)
             print(f'VIT disponível: {vit}.')
-        else:
-            counter = 0
-            while True:
-                pyautogui.sleep(1)
-                pyautogui.click(buttons['magnifier'])
-                pyautogui.sleep(1)
-                pyautogui.click(buttons['rival'])
-                pyautogui.sleep(1)
-                select_level(counter)
-                pyautogui.sleep(1)
-                select_force(counter)
-                pyautogui.sleep(1)
-                pyautogui.click(buttons['search'])
-                pyautogui.sleep(1)
-                x, y = get_screen.get_map_position('darkforces')
-                time = calculate_time(x, y, 'darkforces')
-                print(f'O tempo de marcha: {time} segundos.')
-                pyautogui.click(buttons['search'])
-                pyautogui.sleep(1)
-                pyautogui.click(buttons['center'])
-                pyautogui.sleep(1)
-                pyautogui.click(buttons['5_attack'])
-                pyautogui.sleep(1)
-                pyautogui.click(buttons['diana_squad'])
-                pyautogui.sleep(1)
-                pyautogui.click(buttons['attack'])
-                vit -= 15
+            continue
+        counter = 0
+        while True:
+            pyautogui.sleep(1)
+            pyautogui.click(buttons['magnifier'])
+            pyautogui.sleep(1)
+            pyautogui.click(buttons['rival'])
+            pyautogui.sleep(1)
+            select_level(counter)
+            pyautogui.sleep(1)
+            select_force(counter)
+            pyautogui.sleep(1)
+            pyautogui.click(buttons['search'])
+            pyautogui.sleep(1)
+            x, y = get_screen.get_map_position('darkforces')
+            time = calculate_time(x, y, 'darkforces')
+            print(f'O tempo de marcha: {time} segundos.')
+            pyautogui.click(buttons['search'])
+            pyautogui.sleep(1)
+            pyautogui.click(buttons['center'])
+            pyautogui.sleep(1)
+            pyautogui.click(buttons['5_attack'])
+            pyautogui.sleep(1)
+            pyautogui.click(buttons['diana_squad'])
+            pyautogui.sleep(1)
+            pyautogui.click(buttons['attack'])
+            vit -= 15
+            print(f'VIT disponível: {vit}.')
+            pyautogui.sleep(240 + (time * 2) + 2)
+
+            # Cálculo para verificar se ganhou mais 1 ponto de VIT
+            now = datetime.datetime.now()
+            lapsed_time = (now - initial_time).seconds
+            vit_multiple = lapsed_time * plus_1_vit_counter
+            get_bonus = vit_multiple // seconds_for_plus_1_vit == plus_1_vit_counter
+            if get_bonus:
+                print(f'Adicionando 1 ponto de VIT.')
+                vit += 1
                 print(f'VIT disponível: {vit}.')
-                pyautogui.sleep(240 + (time * 2) + 2)
-                counter += 1
-                if vit < 25:
-                    break
+
+            counter += 1
+            if vit < 25:
+                break
 
     print('Fim do pograma.')
 

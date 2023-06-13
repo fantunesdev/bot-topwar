@@ -44,7 +44,6 @@ def get_wordl_boss_position():
 
 
 def get_map_position(target: str):
-    print(target)
     darkforces = {
         'center': (960, 591),
         'favorites': (1107, 193),
