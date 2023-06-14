@@ -36,8 +36,7 @@ buttons = {
 
 
 def get_cursor_position():
-    while True:
-        print(pyautogui.position(), ' Aperte Ctrl+C para parar.')
+    pyautogui.displayMousePosition()
 
 
 def open_game():
@@ -146,6 +145,35 @@ def attack_dark_forces(vit: int):
                 break
 
     print('Fim do pograma.')
+
+
+def rescue_refugees(vit: int):
+    pyautogui.sleep(2)
+    while True:
+        pyautogui.click(1867, 250)  # Botão de evento regular
+        pyautogui.sleep(1)
+        pyautogui.click(1183, 225)  # Aba dos refugiados
+        pyautogui.sleep(1)
+        pyautogui.click(1124, 1010)  # Abre o inventário com as cartas na primeira posição
+        pyautogui.sleep(1)
+        pyautogui.click(757, 328)  # Abre carta dos refugiados
+        pyautogui.sleep(1)
+        pyautogui.click(957, 1017)  # Clica em Usa
+        pyautogui.sleep(1)
+        pyautogui.click(960, 602)  # Clica nos refugiados
+        pyautogui.sleep(1)
+        pyautogui.click(1060, 492)  # Clica no botão Reunir
+        pyautogui.sleep(1)
+        pyautogui.click(1488, 920)  # Seleciona Diana Squad
+        pyautogui.sleep(1)
+        pyautogui.click(960, 510)  # Envia
+        vit -= 3
+        print(f'VIT disponível: {vit}.')
+        pyautogui.sleep(80)
+        print('Atacou.')
+        if vit < 5:
+            print(f'A VIT acabou. {vit}')
+            break
 
 
 def restore_vit(portion: int):

@@ -14,20 +14,17 @@ try:
         param2 = sys.argv[2]
         vit = int(param2)
         general_functions.attack_dark_forces(vit)
-    if param1 == 'getcursor':
-        general_functions.get_cursor_position()
-    if param1 == 'level':
-        print(get_screen.get_dark_forces_level())
     if param1 == 'boss':
         try:
             general_functions.attack_wordl_boss()
         except ValueError:
             print('É necessário que os parâmetros minutos e segundos sejam números inteiros')
-    if param1 == 'relatory':
-        position = get_screen.get_map_position('boss')
-        print(position)
-    if param1 == 'readlog':
-        handle_log.read_log()
+    if param1 == 'refugee':
+        param2 = sys.argv[2]
+        vit = int(param2)
+        general_functions.rescue_refugees(vit)
+    if param1 == 'cursor':
+        general_functions.get_cursor_position()
     # else:
     #     raise KeyError
 except NameError as message:
