@@ -16,7 +16,7 @@ def print_menu():
 try:
     param1 = sys.argv[1]
 except IndexError as message:
-    print()
+    print_menu()
 try:
     if param1 == 'darkforces':
         param2 = sys.argv[2]

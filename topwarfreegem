@@ -1,6 +1,0 @@
-#!/bin/bash
-
-cd /home/fernando/git/dev/bot-topwar/
-source .venv/bin/activate
-
-python free_gem.py $1
