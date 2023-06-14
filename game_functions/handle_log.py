@@ -3,9 +3,10 @@ import sys
 
 
 def write_log(message: dict):
-    now = datetime.datetime.now().strftime("%H:%M:%S de %d/%m/%Y")
+    today = datetime.datetime.today().strftime('%d/%m/%Y')
+    now = datetime.datetime.now().strftime('%H:%M:%S')
     with open('bot.log', 'a') as logfile:
-        logfile.write(f'{message["text"]:<20}{message["action"]:<13}{now}\n')
+        logfile.write(f'{message["text"]:<25}{message["action"]:<15}{now:<15}{today}\n')
         logfile.close()
 
 
