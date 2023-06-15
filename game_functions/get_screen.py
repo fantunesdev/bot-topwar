@@ -15,7 +15,7 @@ def get_actual_vit():
     # obtendo imagem
     vit_img_time = pyautogui.screenshot(region=(840, 493, 253, 25))
     vit_img_time.save('img/vit_img_time.png')
-    pyautogui.click(375, 354)
+    pyautogui.click(1175, 423)  # Botão fechar
 
     # Convertendo imagem em texto
     image = cv2.imread('img/vit_img_time.png')

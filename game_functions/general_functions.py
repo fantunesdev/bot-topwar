@@ -151,8 +151,8 @@ def rescue_refugees():
     pyautogui.sleep(2)
     vit = get_screen.get_actual_vit()
     print(f'VIT inicial: {vit}.')
-    pyautogui.sleep(1)
     while True:
+        pyautogui.sleep(1)
         pyautogui.click(1867, 250)  # Botão de evento regular
         pyautogui.sleep(1)
         pyautogui.click(1183, 225)  # Aba dos refugiados
@@ -162,7 +162,7 @@ def rescue_refugees():
         pyautogui.click(757, 328)  # Abre carta dos refugiados
         pyautogui.sleep(1)
         pyautogui.click(957, 1017)  # Clica em Usa
-        pyautogui.sleep(1)
+        pyautogui.sleep(2)
         pyautogui.click(960, 602)  # Clica nos refugiados
         pyautogui.sleep(1)
         pyautogui.click(1060, 492)  # Clica no botão Reunir
