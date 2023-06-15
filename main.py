@@ -35,6 +35,8 @@ try:
         param2 = sys.argv[2]
         clicks = int(param2)
         general_functions.free_gem(clicks)
+    if param1 == 'dev':
+        ...
     if param1 == 'cursor':
         general_functions.get_cursor_position()
     # else:

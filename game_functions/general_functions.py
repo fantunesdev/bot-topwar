@@ -204,15 +204,14 @@ def select_force(counter: int):
 
 def select_level(iterations: int):
     max_level = 83
+    level = 79
     for counter in range(iterations):
         pyautogui.sleep(1)
         if counter < 6:
-            level = 80
             selected_level = buttons['level'][str(level)]
             pyautogui.click(selected_level)
         elif level >= max_level:
             print('condição 3')
-            level = 80
             selected_level = buttons['level']['80']
             pyautogui.click(selected_level)
         elif counter % 6 == 0:
@@ -254,6 +253,7 @@ def attack_wordl_boss():
         except TypeError:
             print('O chefão não foi encontrado.')
             break
+    handle_log.read_log()
 
 
 def calculate_time(x: int, y: int, target: str):

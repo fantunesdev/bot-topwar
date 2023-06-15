@@ -7,19 +7,30 @@ import re
 # from game_functions.general_functions import get_cursor_position
 
 
-def get_vit_value():
-    # get_cursor_position()
+def get_actual_vit():
     pyautogui.sleep(2)
-    vit_img = pyautogui.screenshot(region=(156, 145, 28, 16))
-    # vit_img = pyautogui.screenshot(region=(918, 985, 93, 27)) # botão search
-    vit_img.save('img/vit_status.png')
-    color = PIL.Image.open('img/vit_status.png').convert('L')
-    grayscale = PIL.ImageOps.invert(color)
-    grayscale.save('img/greyscale.png')
-    image = cv2.imread('img/vit_status1.png')
-    texto = pytesseract.image_to_string(image)
-    # texto = pytesseract.image_to_string(PIL.ImageOps.invert(PIL.Image.open('img/vit_status1.png').convert('L')))
-    print(texto)
+    pyautogui.click(175, 154)  # mostrador de VIT
+    pyautogui.sleep(1)
+
+    # obtendo imagem
+    vit_img_time = pyautogui.screenshot(region=(840, 493, 253, 25))
+    vit_img_time.save('img/vit_img_time.png')
+    pyautogui.click(375, 354)
+
+    # Convertendo imagem em texto
+    image = cv2.imread('img/vit_img_time.png')
+    pure_text = pytesseract.image_to_string(image)
+    text = pure_text.split(' ')[-1]
+    h = int(text.split('h')[0])
+    m = int(text.split('h')[1].split('m')[0])
+    s = int(text.split('m')[-1].replace('s', ''))
+
+    # calculando vit disponível
+    vit_recharge_time = 345
+    total_time = 25875
+    remaining_time = (h * 3600) + (m * 60) + s
+    actual_vit = (total_time - remaining_time) // vit_recharge_time
+    return actual_vit
 
 
 def get_dark_forces_level():
@@ -117,23 +128,3 @@ def get_rivals_button_position():
     rivals_button = pyautogui.locateOnScreen('img/rival_btn.png')
     x, y = rivals_button
     return x, y
-
-
-def get_relatory_worldboss():
-    pyautogui.sleep(2)
-    try:
-        relatory_worldboss = pyautogui.locateOnScreen('img/relatory_worldboss.png')
-        x, y, w, h = relatory_worldboss
-        pyautogui.sleep(1)
-        time_image = pyautogui.screenshot(region=(x + 80, y + 28, 100, 23))
-        time_image.save('img/time_image.png')
-        # image = cv2.imread('img/time_image.png')
-        # grayscale = PIL.ImageOps.invert(image)
-        # grayscale.save('img/wgreyscale.png')
-        # full_time = pytesseract.image_to_string(grayscale)
-        # print('texto: ', full_time)
-        # h, m, s = full_time.split(':')
-        # return h, m, s
-    except TypeError:
-        print('não')
-        return None
