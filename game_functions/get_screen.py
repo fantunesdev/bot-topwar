@@ -21,9 +21,24 @@ def get_actual_vit():
     image = cv2.imread('img/vit_img_time.png')
     pure_text = pytesseract.image_to_string(image)
     text = pure_text.split(' ')[-1]
-    h = int(text.split('h')[0])
-    m = int(text.split('h')[1].split('m')[0])
-    s = int(text.split('m')[-1].replace('s', ''))
+    try:
+        try:
+            h = int(text.split('h')[0])
+        except ValueError:
+            h = 0
+        try:
+            m = int(text.split('h')[1].split('m')[0])
+        except ValueError:
+            m = 0
+        try:
+            s = int(text.split('m')[-1].replace('s', ''))
+        except ValueError:
+            s = 0
+    except IndexError:
+        pyautogui.click(1176, 114)  # Botão pra retornar à base
+        pyautogui.sleep(1)
+        pyautogui.click(1176, 114)
+        get_actual_vit()
 
     # calculando vit disponível
     vit_recharge_time = 345

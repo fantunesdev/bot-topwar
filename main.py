@@ -23,10 +23,7 @@ try:
         vit = int(param2)
         general_functions.attack_dark_forces(vit)
     if param1 == 'boss':
-        try:
-            general_functions.attack_wordl_boss()
-        except ValueError:
-            print('É necessário que os parâmetros minutos e segundos sejam números inteiros')
+        general_functions.attack_wordl_boss()
     if param1 == 'refugee':
         general_functions.rescue_refugees()
     if param1 == 'warhammer':

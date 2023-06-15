@@ -152,6 +152,7 @@ def rescue_refugees():
     vit = get_screen.get_actual_vit()
     print(f'VIT inicial: {vit}.')
     while True:
+        print(f'Iniciando resgate.')
         pyautogui.sleep(1)
         pyautogui.click(1867, 250)  # Botão de evento regular
         pyautogui.sleep(1)
@@ -172,9 +173,9 @@ def rescue_refugees():
         pyautogui.click(960, 510)  # Envia
         pyautogui.sleep(80)
         vit = get_screen.get_actual_vit()
-        print(f'Resgatou os refugiados. VIT atual: {vit}')
+        print(f'Resgatou os refugiados. VIT disponível: {vit}')
         if vit < 5:
-            print(f'A VIT acabou. {vit}')
+            print(f'Fim do resgate. A VIT acabou. {vit}')
             break
 
 
@@ -204,7 +205,6 @@ def attack_warhammer():
         pyautogui.sleep(60 + time)
         if vit < 10:
             break
-
 
 
 def restore_vit(portion: int):
@@ -309,4 +309,3 @@ def calculate_time(x: int, y: int, target: str):
     time = math.ceil(distance / diana_squad_velocity)
 
     return time
-
