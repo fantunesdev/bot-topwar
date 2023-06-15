@@ -28,9 +28,9 @@ try:
         except ValueError:
             print('É necessário que os parâmetros minutos e segundos sejam números inteiros')
     if param1 == 'refugee':
-        param2 = sys.argv[2]
-        vit = int(param2)
-        general_functions.rescue_refugees(vit)
+        general_functions.rescue_refugees()
+    if param1 == 'warhammer':
+        general_functions.attack_warhammer()
     if param1 == 'freegem':
         param2 = sys.argv[2]
         clicks = int(param2)

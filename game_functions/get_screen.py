@@ -62,6 +62,13 @@ def get_map_position(target: str):
         'coordinates': (1069, 380, 110, 25)
     }
 
+    warhammer = {
+        'center': (950, 617),
+        'favorites': (1142, 219),
+        'rival': (1090, 553),
+        'coordinates': (1069, 380, 110, 25)
+    }
+
     boss = {
         'center': (951, 533),
         'favorites': (1145, 618),
@@ -71,6 +78,8 @@ def get_map_position(target: str):
 
     if target == 'boss':
         selected = boss
+    if target == 'warhammer':
+        selected = warhammer
     else:
         selected = darkforces
 
@@ -89,11 +98,15 @@ def get_map_position(target: str):
     pyautogui.sleep(1)
 
     # Lendo a posição
+    if selected == warhammer:
+        pyautogui.sleep(4)
     test = pyautogui.screenshot(region=(selected['coordinates']))
     test.save('img/coordinates.png')
     image = cv2.imread('img/coordinates.png')
     if target == 'darkforces':
         pure_text = pytesseract.image_to_string(image).split(' ')[1].replace(':', '')  # darkforces
+    if target == 'warhammer':
+        pure_text = pytesseract.image_to_string(image)  # boss
     if target == 'boss':
         pure_text = pytesseract.image_to_string(image)  # boss
     handle_text = re.sub('[^A-Za-z0-9]+', '', pure_text)

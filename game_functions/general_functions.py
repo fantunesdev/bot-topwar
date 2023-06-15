@@ -147,8 +147,11 @@ def attack_dark_forces(vit: int):
     print('Fim do pograma.')
 
 
-def rescue_refugees(vit: int):
+def rescue_refugees():
     pyautogui.sleep(2)
+    vit = get_screen.get_actual_vit()
+    print(f'VIT inicial: {vit}.')
+    pyautogui.sleep(1)
     while True:
         pyautogui.click(1867, 250)  # Botão de evento regular
         pyautogui.sleep(1)
@@ -167,13 +170,41 @@ def rescue_refugees(vit: int):
         pyautogui.click(1488, 920)  # Seleciona Diana Squad
         pyautogui.sleep(1)
         pyautogui.click(960, 510)  # Envia
-        vit -= 3
-        print(f'VIT disponível: {vit}.')
         pyautogui.sleep(80)
-        print('Atacou.')
+        vit = get_screen.get_actual_vit()
+        print(f'Resgatou os refugiados. VIT atual: {vit}')
         if vit < 5:
             print(f'A VIT acabou. {vit}')
             break
+
+
+def attack_warhammer():
+    pyautogui.sleep(2)
+    for i in range(2):
+        vit = get_screen.get_actual_vit()
+        pyautogui.sleep(3)
+        pyautogui.click(736, 1019)  # Lupa de pesquisa
+        pyautogui.sleep(1)
+        pyautogui.click(1030, 560)  # Aba reunir
+        pyautogui.sleep(1)
+        pyautogui.click(1040, 933)  # Level 70 de warhammer
+        pyautogui.sleep(1)
+        pyautogui.click(963, 1011)  # Botão Pesquisar
+        pyautogui.sleep(1)
+        x, y = get_screen.get_map_position('warhammer')
+        time = calculate_time(x, y, 'warhammer')
+        pyautogui.sleep(1)
+        pyautogui.click(963, 608)  # Warhammer centralizado
+        pyautogui.sleep(1)
+        pyautogui.click(1065, 487)  # botão reunir
+        pyautogui.sleep(1)
+        pyautogui.click(1487, 926)  # Diana Squad
+        pyautogui.sleep(1)
+        pyautogui.click(959, 513)  # Botão lutar
+        pyautogui.sleep(60 + time)
+        if vit < 10:
+            break
+
 
 
 def restore_vit(portion: int):
@@ -261,6 +292,8 @@ def calculate_time(x: int, y: int, target: str):
 
     if target == 'boss':
         velocity = 1.59
+    if target == 'warhammer':
+        velocity = 1.5
     else:
         velocity = 2.325807970587723
     diana_squad_velocity = velocity * 1.23
