@@ -18,6 +18,7 @@ try:
 except IndexError as message:
     print('*** ERRO *** É necessário passar um parâmetro. Por favor, selecione uma das opções válidas.\n')
     print_menu()
+    exit(-1)
 
 try:
     if param1 == 'darkforces':
