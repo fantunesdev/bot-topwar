@@ -33,7 +33,7 @@ try:
         clicks = int(param2)
         general_functions.free_gem(clicks)
     if param1 == 'dev':
-        ...
+        get_screen.get_relatory()
     if param1 == 'cursor':
         general_functions.get_cursor_position()
     # else:

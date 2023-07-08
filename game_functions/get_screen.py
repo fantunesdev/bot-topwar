@@ -7,6 +7,58 @@ import re
 # from game_functions.general_functions import get_cursor_position
 
 
+def save_relatory():
+    pyautogui.sleep(1)
+    favorite_rgb = {
+        'r': 0,
+        'g': 132,
+        'b': 79,
+        'name': 'favorite'
+    }
+    rival_rgb = {
+        'r': 253,
+        'g': 53,
+        'b': 57,
+        'name': 'rival'
+    }
+    confirme_rgb = {
+        'r': 100,
+        'g': 146,
+        'b': 244,
+        'name': 'confirme'
+    }
+
+    buttons = [
+        favorite_rgb,
+        rival_rgb,
+        confirme_rgb
+    ]
+
+    for button in buttons:
+        screenshot = pyautogui.screenshot(region=(0, 0, 1920, 1080))
+        width, heigh = screenshot.size
+        target = []
+        for x in range(0, width):
+            for y in range(0, heigh):
+                r, g, b = screenshot.getpixel((x, y))
+                if r == button['r'] and g == button['g'] and b == button['b']:
+                    target.append(x)
+                    target.append(y)
+                    break
+        target = [target[0], target[1]]
+        pyautogui.click(target)
+        pyautogui.sleep(0.5)
+
+
+def get_relatory():
+    pyautogui.sleep(1)
+
+    pyautogui.click(112, 472)  # Pesquisa no mapa
+    pyautogui.sleep(1)
+    pyautogui.click(1106, 289)  # Aba Rival
+    pyautogui.sleep(1)
+
+
 def get_actual_vit():
     pyautogui.sleep(2)
     pyautogui.click(175, 154)  # mostrador de VIT
