@@ -16,8 +16,9 @@ def print_menu():
 try:
     param1 = sys.argv[1]
 except IndexError as message:
-    print('*** ERRO *** Opção de parâmetro inválida.\n')
+    print('*** ERRO *** É necessário passar um parâmetro. Por favor, selecione uma das opções válidas.\n')
     print_menu()
+
 try:
     if param1 == 'darkforces':
         general_functions.attack_dark_forces()
@@ -35,11 +36,9 @@ try:
         ...
     if param1 == 'cursor':
         general_functions.get_cursor_position()
-    # else:
-    #     raise KeyError
-except NameError as message:
-    if 'param1' == message.name:
-        print('*** ERRO *** O parâmetro 1 é obrigatório.\n')
+    else:
+        print('*** ERRO *** Opção de parâmetro inválida.\n')
         print_menu()
+        print('*** ENCERRANDO! ***')
 except KeyboardInterrupt:
     print('*** ENCERRANDO! ***')
