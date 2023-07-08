@@ -9,45 +9,53 @@ import re
 
 def save_relatory():
     pyautogui.sleep(1)
-    favorite_rgb = {
-        'r': 0,
-        'g': 132,
-        'b': 79,
+    favorite_button_rgb = {
+        'r': 40,
+        'g': 130,
+        'b': 76,
         'name': 'favorite'
     }
-    rival_rgb = {
-        'r': 253,
-        'g': 53,
-        'b': 57,
+    rival_button_rgb = {
+        'r': 239,
+        'g': 67,
+        'b': 48,
         'name': 'rival'
     }
-    confirme_rgb = {
-        'r': 100,
+    confirme_button_rgb = {
+        'r': 104,
         'g': 146,
-        'b': 244,
+        'b': 248,
         'name': 'confirme'
     }
+    favorites_button_position = get_button_position(favorite_button_rgb)
+    pyautogui.sleep(1)
+    pyautogui.click(favorites_button_position)
+    pyautogui.sleep(1)
+    rival_button_position = get_button_position(rival_button_rgb)
+    pyautogui.sleep(1)
+    pyautogui.click(rival_button_position)
+    confirme_button_position = get_button_position(confirme_button_rgb)
+    pyautogui.sleep(1)
+    pyautogui.click(confirme_button_position)
+    pyautogui.sleep(1)
 
-    buttons = [
-        favorite_rgb,
-        rival_rgb,
-        confirme_rgb
-    ]
 
-    for button in buttons:
-        screenshot = pyautogui.screenshot(region=(0, 0, 1920, 1080))
-        width, heigh = screenshot.size
-        target = []
-        for x in range(0, width):
-            for y in range(0, heigh):
-                r, g, b = screenshot.getpixel((x, y))
-                if r == button['r'] and g == button['g'] and b == button['b']:
-                    target.append(x)
-                    target.append(y)
-                    break
-        target = [target[0], target[1]]
-        pyautogui.click(target)
-        pyautogui.sleep(0.5)
+def get_button_position(button_rgb: dict):
+
+    screenshot = pyautogui.screenshot(region=(0, 0, 1920, 1080))
+    width, heigh = screenshot.size
+    target = []
+
+    for x in range(0, width):
+        for y in range(0, heigh):
+            r, g, b = screenshot.getpixel((x, y))
+            if r == button_rgb['r'] and g == button_rgb['g'] and b == button_rgb['b']:
+                target.append(x)
+                target.append(y)
+                break
+    target = [target[0], target[1]]
+
+    return target
 
 
 def get_relatory():
@@ -57,6 +65,27 @@ def get_relatory():
     pyautogui.sleep(1)
     pyautogui.click(1106, 289)  # Aba Rival
     pyautogui.sleep(1)
+
+    test = pyautogui.screenshot(region=(1069, 380, 110, 25))
+    test.save('img/coordinates.png')
+    image = cv2.imread('img/coordinates.png')
+    pure_text = pytesseract.image_to_string(image)  # boss
+    handle_text = re.sub('[^A-Za-z0-9]+', '', pure_text)
+    words_list = handle_text.split('Y')
+    x = int(words_list[0].replace('X', ''))
+    y = int(words_list[1])
+
+    # apagando o relatório de rivais
+    pyautogui.sleep(1)
+    pyautogui.click(745, 234)  # Engrenagem
+    pyautogui.sleep(1)
+    pyautogui.click(760, 381)  # Checkbox
+    pyautogui.sleep(1)
+    pyautogui.click(1085, 924)  # Botão apagar
+    pyautogui.sleep(1)
+    pyautogui.click(1176, 231)  # Botão Fechar
+
+    return x, y
 
 
 def get_actual_vit():
@@ -165,8 +194,7 @@ def get_map_position(target: str):
     pyautogui.sleep(1)
 
     # Lendo a posição
-    if selected == warhammer:
-        pyautogui.sleep(4)
+
     test = pyautogui.screenshot(region=(selected['coordinates']))
     test.save('img/coordinates.png')
     image = cv2.imread('img/coordinates.png')
@@ -191,20 +219,4 @@ def get_map_position(target: str):
     pyautogui.sleep(1)
     pyautogui.click(1176, 231)  # Botão Fechar
 
-    return x, y
-
-
-def get_favorites_button_position():
-    try:
-        favorites_button = pyautogui.locateOnScreen('img/favorites_btn.png')
-        x, y = favorites_button
-        return x, y
-    except ValueError:
-        print('não reconheceu favoritos')
-
-
-def get_rivals_button_position():
-    pyautogui.sleep(2)
-    rivals_button = pyautogui.locateOnScreen('img/rival_btn.png')
-    x, y = rivals_button
     return x, y

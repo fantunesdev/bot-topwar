@@ -19,9 +19,7 @@ except IndexError as message:
     print_menu()
 try:
     if param1 == 'darkforces':
-        param2 = sys.argv[2]
-        vit = int(param2)
-        general_functions.attack_dark_forces(vit)
+        general_functions.attack_dark_forces()
     if param1 == 'boss':
         general_functions.attack_wordl_boss()
     if param1 == 'refugee':
@@ -33,7 +31,7 @@ try:
         clicks = int(param2)
         general_functions.free_gem(clicks)
     if param1 == 'dev':
-        get_screen.get_relatory()
+        ...
     if param1 == 'cursor':
         general_functions.get_cursor_position()
     # else:
@@ -43,8 +41,8 @@ except NameError as message:
         print('*** ERRO *** O parâmetro 1 é obrigatório.\n')
         print_menu()
 
-except KeyError as message:
-    print('*** ERRO *** Opção de parâmetro inválida.\n')
-    print_menu()
+# except KeyError as message:
+#     print('*** ERRO *** Opção de parâmetro inválida.\n')
+#     print_menu()
 except KeyboardInterrupt:
     print('*** ENCERRANDO! ***')
