@@ -52,8 +52,12 @@ def get_button_position(button_rgb: dict):
             if r == button_rgb['r'] and g == button_rgb['g'] and b == button_rgb['b']:
                 target.append(x)
                 target.append(y)
-                break
-    target = [target[0], target[1]]
+
+    try:
+        target = [target[0], target[1]]
+    except KeyError:
+        print('As cores do botão mudaram. Por favor obtenha as novas cores e tente de novo.')
+        exit(-1)
 
     return target
 

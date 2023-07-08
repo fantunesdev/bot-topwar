@@ -16,6 +16,7 @@ def print_menu():
 try:
     param1 = sys.argv[1]
 except IndexError as message:
+    print('*** ERRO *** Opção de parâmetro inválida.\n')
     print_menu()
 try:
     if param1 == 'darkforces':
@@ -40,9 +41,5 @@ except NameError as message:
     if 'param1' == message.name:
         print('*** ERRO *** O parâmetro 1 é obrigatório.\n')
         print_menu()
-
-# except KeyError as message:
-#     print('*** ERRO *** Opção de parâmetro inválida.\n')
-#     print_menu()
 except KeyboardInterrupt:
     print('*** ENCERRANDO! ***')
