@@ -30,7 +30,11 @@ try:
     if param1 == 'warhammer':
         general_functions.attack_warhammer()
     if param1 == 'freegem':
-        param2 = sys.argv[2]
+        try:
+            param2 = sys.argv[2]
+        except IndexError:
+            print('O é necessário passar o número de clicks como parâmetro.')
+            exit(-1)
         clicks = int(param2)
         general_functions.free_gem(clicks)
     if param1 == 'dev':
