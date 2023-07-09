@@ -30,6 +30,12 @@ try:
                 exit(-1)
         else:
             recharges = 5
+        if recharges < 1:
+            print('Você precisa passar um número maior que zero.')
+            exit(-1)
+        if recharges > 20:
+            print('Você precisa passar um número menor que 20.')
+            exit(-1)
         general_functions.attack_dark_forces(recharges)
     if param1 == 'boss':
         general_functions.attack_wordl_boss()
