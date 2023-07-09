@@ -22,7 +22,15 @@ except IndexError as message:
 
 try:
     if param1 == 'darkforces':
-        general_functions.attack_dark_forces()
+        if len(sys.argv) > 2:
+            try:
+                recharges = int(sys.argv[2])
+            except ValueError:
+                print(f'Você passou o parâmetro: {sys.argv[2]}. O número de recargas precisa ser um número inteiro.')
+                exit(-1)
+        else:
+            recharges = 5
+        general_functions.attack_dark_forces(recharges)
     if param1 == 'boss':
         general_functions.attack_wordl_boss()
     if param1 == 'refugee':
