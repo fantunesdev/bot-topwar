@@ -143,7 +143,7 @@ def get_dark_forces_level():
     return level_value
 
 
-def get_wordl_boss_position():
+def get_world_boss_button_position():
     pyautogui.sleep(2)
     for i in range(5):
         try:

@@ -237,7 +237,7 @@ def select_level(iterations: int):
 
 def attack_wordl_boss():
     pyautogui.sleep(2)
-    x, y = get_screen.get_wordl_boss_position()
+    x, y = get_screen.get_world_boss_button_position()
     pyautogui.click(x, y)  # worldboss button position
     pyautogui.sleep(1)
     pyautogui.click(960, 767)  # botão pesquisa rápida
