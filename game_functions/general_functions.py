@@ -104,8 +104,8 @@ def attack_dark_forces(recharges: int):
             pyautogui.sleep(1)
             pyautogui.click(buttons['rival'])
             pyautogui.sleep(1)
-            # select_level(counter)
-            # pyautogui.sleep(1)
+            select_level(counter)
+            pyautogui.sleep(1)
             select_force(counter)
             pyautogui.sleep(1)
             pyautogui.click(buttons['search'])
@@ -224,21 +224,17 @@ def select_force(counter: int):
 
 
 def select_level(iterations: int):
+    min_level = 76
     max_level = 83
-    level = 79
-    for counter in range(iterations):
-        pyautogui.sleep(1)
-        if counter < 6:
-            selected_level = buttons['level'][str(level)]
-            pyautogui.click(selected_level)
-        elif level >= max_level:
-            print('condição 3')
-            selected_level = buttons['level']['80']
-            pyautogui.click(selected_level)
-        elif counter % 6 == 0:
-            print('condição 2')
-            level = int(get_screen.get_dark_forces_level())
-            pyautogui.click(buttons['level']['increase'])
+    vetor = 'increase'
+    pyautogui.sleep(1)
+    if iterations % 12 == 0:
+        level = int(get_screen.get_dark_forces_level())
+        if level >= max_level:
+            vetor = 'decrease'
+        elif level <= min_level:
+            vetor = 'increase'
+        pyautogui.click(buttons['level'][vetor])
 
 
 def attack_wordl_boss():
