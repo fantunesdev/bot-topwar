@@ -37,13 +37,13 @@ try:
             print('Você precisa passar um número menor que 20.')
             exit(-1)
         general_functions.attack_dark_forces(recharges)
-    if param1 == 'boss':
+    elif param1 == 'boss':
         general_functions.attack_wordl_boss()
-    if param1 == 'refugee':
+    elif param1 == 'refugee':
         general_functions.rescue_refugees()
-    if param1 == 'warhammer':
+    elif param1 == 'warhammer':
         general_functions.attack_warhammer()
-    if param1 == 'freegem':
+    elif param1 == 'freegem':
         try:
             param2 = sys.argv[2]
         except IndexError:
@@ -51,9 +51,9 @@ try:
             exit(-1)
         clicks = int(param2)
         general_functions.free_gem(clicks)
-    if param1 == 'dev':
+    elif param1 == 'dev':
         ...
-    if param1 == 'cursor':
+    elif param1 == 'cursor':
         general_functions.get_cursor_position()
     else:
         print('*** ERRO *** Opção de parâmetro inválida.\n')
