@@ -226,15 +226,15 @@ def select_force(counter: int):
 def select_level(iterations: int):
     min_level = 76
     max_level = 83
-    vetor = 'increase'
+    vector = 'increase'
     pyautogui.sleep(1)
     if iterations % 12 == 0:
         level = int(get_screen.get_dark_forces_level())
         if level >= max_level:
-            vetor = 'decrease'
+            vector = 'decrease'
         elif level <= min_level:
-            vetor = 'increase'
-        pyautogui.click(buttons['level'][vetor])
+            vector = 'increase'
+        pyautogui.click(buttons['level'][vector])
 
 
 def attack_wordl_boss():
