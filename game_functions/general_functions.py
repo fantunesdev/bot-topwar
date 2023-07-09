@@ -14,6 +14,7 @@ buttons = {
     'diana_squad': (1487, 919),
     'level': {
         '67': (852, 929),
+        '76': (959, 929),
         '80': (999, 929),
         '81': (1013, 929),
         '82': (1026, 929),
@@ -224,17 +225,14 @@ def select_force(counter: int):
 
 
 def select_level(iterations: int):
-    min_level = 76
     max_level = 83
-    vector = 'increase'
     pyautogui.sleep(1)
     if iterations % 12 == 0:
         level = int(get_screen.get_dark_forces_level())
-        if level >= max_level:
-            vector = 'decrease'
-        elif level <= min_level:
-            vector = 'increase'
-        pyautogui.click(buttons['level'][vector])
+        if level >= max_level or iterations == 0:
+            pyautogui.click(buttons['level']['76'])
+        else:
+            pyautogui.click(buttons['level']['increase'])
 
 
 def attack_wordl_boss():
