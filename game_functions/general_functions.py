@@ -83,7 +83,7 @@ def free_gem(clicks: int):
                 pyautogui.sleep(60)
                 pyautogui.click(1287, 212)
                 pyautogui.sleep(1)
-                pyautogui.click(1406, 221)
+                pyautogui.click(1406, 212)
 
 
 def attack_dark_forces(recharges: int):
