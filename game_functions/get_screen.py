@@ -106,24 +106,28 @@ def get_actual_vit():
     image = cv2.imread('img/vit_img_time.png')
     pure_text = pytesseract.image_to_string(image)
     text = pure_text.split(' ')[-1]
+    h, m, s = 0, 0, 0
     try:
         try:
             h = int(text.split('h')[0])
         except ValueError:
+            print('Não foi possível obter as horas para o carregamento total de VIT. Setando o valor padrão: 0.')
             h = 0
         try:
             m = int(text.split('h')[1].split('m')[0])
         except ValueError:
+            print('Não foi possível obter os minutos para o carregamento total de VIT. Setando o valor padrão: 0.')
             m = 0
         try:
             s = int(text.split('m')[-1].replace('s', ''))
         except ValueError:
+            print('Não foi possível obter os segundos para o carregamento total de VIT. Setando o valor padrão: 0.')
             s = 0
     except IndexError:
         pyautogui.click(1176, 114)  # Botão pra retornar à base
         pyautogui.sleep(1)
         pyautogui.click(1176, 114)
-        get_actual_vit()
+        # get_actual_vit()
 
     # calculando vit disponível
     vit_recharge_time = 345
@@ -141,17 +145,6 @@ def get_dark_forces_level():
     text = pytesseract.image_to_string(image)
     level_value = text.split(':')[1].split('.')[0].split('°')[0]
     return level_value
-
-
-def get_world_boss_button_position():
-    pyautogui.sleep(2)
-    for i in range(5):
-        try:
-            wordl_boss_button = pyautogui.locateOnScreen('img/worldboss.png')
-            x, y, width, height = wordl_boss_button
-            return x + 15, y + 15
-        except TypeError:
-            return
 
 
 def get_map_position(target: str):

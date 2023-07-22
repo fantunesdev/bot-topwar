@@ -9,6 +9,7 @@ def print_menu():
     print('darkforces - Ataca a força das trevas. (É necessário passar a VIT atual).')
     print('boss       - Ataca o chefão mundial.')
     print('refugee    - Resgate de refugiados. (É necessário passar a VIT atual).')
+    print('warhammer  - Ataca warhammers.')
     print('gem        - Coleta os diamantes diários gratuitos. (É necessário passar o número de clicks).')
     print('cursor     - Printa no console a posição do cursor')
 
@@ -38,7 +39,7 @@ try:
             exit(-1)
         general_functions.attack_dark_forces(recharges)
     elif param1 == 'boss':
-        general_functions.attack_wordl_boss()
+        general_functions.attack_world_boss()
     elif param1 == 'refugee':
         general_functions.rescue_refugees()
     elif param1 == 'warhammer':
