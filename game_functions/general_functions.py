@@ -154,10 +154,10 @@ def attack_world_boss():
             exit(62)
         pyautogui.click(x, y)  # worldboss button position
         pyautogui.sleep(1)
-        pyautogui.click(960, 767)  # botão pesquisa rápida
-        pyautogui.sleep(1)
-        pyautogui.click(buttons['center'])
-        pyautogui.sleep(1)
+        # pyautogui.click(960, 767)  # botão pesquisa rápida
+        # pyautogui.sleep(1)
+        # pyautogui.click(buttons['center'])
+        # pyautogui.sleep(1)
         get_screen.save_relatory()
         pyautogui.sleep(1)
         x, y = get_screen.get_relatory()
@@ -285,7 +285,7 @@ def calculate_time(x: int, y: int, target: str):
     base = base_location
 
     if target == 'boss':
-        velocity = 2.058
+        velocity = 1.89746
     elif target == 'warhammer':
         velocity = 1.5
     else:
