@@ -141,9 +141,9 @@ def attack_dark_forces(recharges: int):
 def attack_world_boss():
     pyautogui.sleep(2)
     button_rgb = {
-        'r': 201,
-        'g': 147,
-        'b': 17
+        'r': 166,
+        'g': 91,
+        'b': 16
     }
     now = datetime.datetime.now()
     for i in range(0, 5):
@@ -154,10 +154,6 @@ def attack_world_boss():
             exit(62)
         pyautogui.click(x, y)  # worldboss button position
         pyautogui.sleep(1)
-        # pyautogui.click(960, 767)  # botão pesquisa rápida
-        # pyautogui.sleep(1)
-        # pyautogui.click(buttons['center'])
-        # pyautogui.sleep(1)
         get_screen.save_relatory()
         pyautogui.sleep(1)
         x, y = get_screen.get_relatory()
