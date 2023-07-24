@@ -86,56 +86,63 @@ def free_gem(clicks: int):
                 pyautogui.click(1406, 212)
 
 
-def attack_dark_forces(recharges: int):
+def handle_attack_dark_forces(recharges: int):
     pyautogui.sleep(2)
     print(f'Iniciando ataque com {recharges} recargas.')
     vit = get_screen.get_actual_vit()
-    for i in range(recharges):
-        if vit < 25:
-            add_vit_value = 50
-            print(f'A VIT acabou. Fazendo a recarga {i}.')
-            restore_vit(add_vit_value)
-            vit += add_vit_value
-            pyautogui.click(1705, 350)
-            print(f'VIT disponível: {vit}.')
-        counter = 0
-        while True:
-            pyautogui.sleep(1)
-            pyautogui.click(buttons['magnifier'])
-            pyautogui.sleep(1)
-            pyautogui.click(buttons['rival'])
-            pyautogui.sleep(1)
-            select_level(counter)
-            pyautogui.sleep(1)
-            select_force(counter)
-            pyautogui.sleep(1)
-            pyautogui.click(buttons['search'])
-            pyautogui.sleep(1)
-            pyautogui.click(buttons['center'])
-            pyautogui.sleep(1)
-            get_screen.save_relatory()
-            pyautogui.sleep(1)
-            x, y = get_screen.get_relatory()
-            pyautogui.sleep(1)
-            time = calculate_time(x, y, 'darkforces')
-            print(f'O tempo de marcha é de {time} segundos.')
-            pyautogui.click(buttons['center'])
-            pyautogui.sleep(1)
-            pyautogui.click(buttons['5_attack'])
-            pyautogui.sleep(1)
-            pyautogui.click(buttons['diana_squad'])
-            pyautogui.sleep(1)
-            pyautogui.click(buttons['attack'])
-            pyautogui.sleep(240 + (time * 2) + 2)
-
-            vit = get_screen.get_actual_vit()
-            print(f'VIT disponível: {vit}.')
-
-            counter += 1
+    if recharges == 0:
+        attack_dark_forces(vit)
+    else:
+        for i in range(recharges):
             if vit < 25:
-                break
+                add_vit_value = 50
+                print(f'A VIT acabou. Fazendo a recarga {i}.')
+                restore_vit(add_vit_value)
+                vit += add_vit_value
+                pyautogui.click(1705, 350)
+                print(f'VIT disponível: {vit}.')
+            attack_dark_forces(vit) 
+    print('Fim do ataque.')
 
-    print('Fim do pograma.')
+
+def attack_dark_forces(vit):
+    counter = 0
+    while True:
+        pyautogui.sleep(1)
+        pyautogui.click(buttons['magnifier'])
+        pyautogui.sleep(1)
+        pyautogui.click(buttons['rival'])
+        pyautogui.sleep(1)
+        select_level(counter)
+        pyautogui.sleep(1)
+        select_force(counter)
+        pyautogui.sleep(1)
+        pyautogui.click(buttons['search'])
+        pyautogui.sleep(1)
+        pyautogui.click(buttons['center'])
+        pyautogui.sleep(1)
+        print('teste')
+        get_screen.save_relatory()
+        pyautogui.sleep(1)
+        x, y = get_screen.get_relatory()
+        pyautogui.sleep(1)
+        time = calculate_time(x, y, 'darkforces')
+        print(f'O tempo de marcha é de {time} segundos.')
+        pyautogui.click(buttons['center'])
+        pyautogui.sleep(1)
+        pyautogui.click(buttons['5_attack'])
+        pyautogui.sleep(1)
+        pyautogui.click(buttons['diana_squad'])
+        pyautogui.sleep(1)
+        pyautogui.click(buttons['attack'])
+        pyautogui.sleep(240 + (time * 2) + 2)
+
+        vit = get_screen.get_actual_vit()
+        print(f'VIT disponível: {vit}.')
+
+        counter += 1
+        if vit < 25:
+            break
 
 
 def attack_world_boss():
@@ -146,25 +153,31 @@ def attack_world_boss():
         'b': 16
     }
     now = datetime.datetime.now()
-    for i in range(0, 5):
-        if now.hour in [1, 9, 17]:
-            x, y = get_screen.get_button_position(button_rgb)
-        else:
-            print('Fora do horário do evento do chefão. Encerrando.')
-            exit(62)
-        pyautogui.click(x, y)  # worldboss button position
-        pyautogui.sleep(1)
-        get_screen.save_relatory()
-        pyautogui.sleep(1)
-        x, y = get_screen.get_relatory()
-        pyautogui.sleep(1)
-        time = calculate_time(x, y, 'boss')
-        print(f'O tempo de marcha é de {time} segundos.')
+    if now.hour in [1, 9, 17]:
+        x, y = get_screen.get_button_position(button_rgb)
+    else:
+        print('Fora do horário do evento do chefão. Encerrando.')
+        exit(62)
+    pyautogui.click(x, y)  # worldboss button position
+    pyautogui.sleep(1)
+    pyautogui.click(buttons['center'])
+    pyautogui.sleep(1)
+    pyautogui.click(970, 762)  # Pesquisa rápida
+    pyautogui.sleep(1)
+    pyautogui.click(buttons['center'])
+    pyautogui.sleep(1)
+    get_screen.save_relatory()
+    pyautogui.sleep(1)
+    x, y = get_screen.get_relatory()
+    pyautogui.sleep(1)
+    time = calculate_time(x, y, 'boss')
+    print(f'O tempo de marcha é de {time} segundos.')
+    for i in range(0, 4):
         pyautogui.click(buttons['center'])
         pyautogui.sleep(1)
         pyautogui.click(1056, 894)  # botão atacar
         pyautogui.sleep(1)
-        pyautogui.click(1483, 920)  # Diana squad
+        pyautogui.click(1485, 920)  # Diana squad
         pyautogui.sleep(1)
         pyautogui.click(952, 516)  # Marchar
         pyautogui.sleep(time)

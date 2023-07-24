@@ -10,9 +10,9 @@ import re
 def save_relatory():
     pyautogui.sleep(1)
     favorite_button_rgb = {
-        'r': 40,
-        'g': 130,
-        'b': 76,
+        'r': 119,
+        'g': 226,
+        'b': 158,
         'name': 'favorite'
     }
     rival_button_rgb = {
@@ -98,7 +98,7 @@ def get_actual_vit():
     pyautogui.sleep(1)
 
     # obtendo imagem
-    vit_img_time = pyautogui.screenshot(region=(840, 493, 253, 25))
+    vit_img_time = pyautogui.screenshot(region=(840, 489, 253, 25))
     vit_img_time.save('img/vit_img_time.png')
     pyautogui.click(1175, 423)  # Botão fechar
 
@@ -139,7 +139,7 @@ def get_actual_vit():
 
 def get_dark_forces_level():
     pyautogui.sleep(1)
-    dark_forces_level_image = pyautogui.screenshot(region=(925, 894, 65, 17))
+    dark_forces_level_image = pyautogui.screenshot(region=(923, 885, 70, 28))
     dark_forces_level_image.save('img/dark_forces_level.png')
     image = cv2.imread('img/dark_forces_level.png')
     text = pytesseract.image_to_string(image)

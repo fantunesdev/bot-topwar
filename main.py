@@ -30,14 +30,14 @@ try:
                 print(f'Você passou o parâmetro: {sys.argv[2]}. O número de recargas precisa ser um número inteiro.')
                 exit(-1)
         else:
-            recharges = 5
-        if recharges < 1:
-            print('Você precisa passar um número maior que zero.')
+            recharges = 0
+        if recharges < 0:
+            print('Você precisa passar um número maior que 1.')
             exit(-1)
         if recharges > 20:
             print('Você precisa passar um número menor que 20.')
             exit(-1)
-        general_functions.attack_dark_forces(recharges)
+        general_functions.handle_attack_dark_forces(recharges)
     elif param1 == 'boss':
         general_functions.attack_world_boss()
     elif param1 == 'refugee':
