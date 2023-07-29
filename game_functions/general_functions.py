@@ -73,7 +73,7 @@ def free_gem(clicks: int):
     pyautogui.sleep(5)
     remaining_clicks = clicks
     for iteration in range(clicks):
-        pyautogui.sleep(1)
+        pyautogui.sleep(3)
         pyautogui.click(1595, 313)
         remaining_clicks -= 1
         print(f'Limite (hoje): {remaining_clicks}.')
@@ -160,8 +160,6 @@ def attack_world_boss():
         exit(62)
     pyautogui.click(x, y)  # worldboss button position
     pyautogui.sleep(1)
-    pyautogui.click(buttons['center'])
-    pyautogui.sleep(1)
     pyautogui.click(970, 762)  # Pesquisa rápida
     pyautogui.sleep(1)
     pyautogui.click(buttons['center'])
@@ -172,7 +170,7 @@ def attack_world_boss():
     pyautogui.sleep(1)
     time = calculate_time(x, y, 'boss')
     print(f'O tempo de marcha é de {time} segundos.')
-    for i in range(0, 4):
+    for i in range(0, 5):
         pyautogui.click(buttons['center'])
         pyautogui.sleep(1)
         pyautogui.click(1056, 894)  # botão atacar

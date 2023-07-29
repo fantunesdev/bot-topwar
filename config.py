@@ -1,1 +1,1 @@
-base_location = {'x': 419, 'y': 271}
+base_location = {'x': 507, 'y': 409}

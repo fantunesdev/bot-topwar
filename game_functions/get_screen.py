@@ -70,20 +70,24 @@ def get_relatory():
     pyautogui.click(1106, 289)  # Aba Rival
     pyautogui.sleep(1)
 
-    test = pyautogui.screenshot(region=(1069, 380, 110, 25))
-    test.save('img/coordinates.png')
+    coordinates_img = pyautogui.screenshot(region=(1065, 377, 110, 27))
+    coordinates_img.save('img/coordinates.png')
     image = cv2.imread('img/coordinates.png')
-    pure_text = pytesseract.image_to_string(image)  # boss
-    handle_text = re.sub('[^A-Za-z0-9]+', '', pure_text)
-    words_list = handle_text.split('Y')
-    x = int(words_list[0].replace('X', ''))
-    y = int(words_list[1])
+    pure_text = pytesseract.image_to_string(image)
+    try:
+        handle_text = re.sub('[^A-Za-z0-9]+', '', pure_text)
+        words_list = handle_text.split('Y')
+        x = int(words_list[0].replace('X', ''))
+        y = int(words_list[1])
+    except ValueError:
+        print('Problema ao obter as coordenadas. Edite o código que obtém o print de coordinates.png')
+        exit(14)
 
     # apagando o relatório de rivais
     pyautogui.sleep(1)
     pyautogui.click(745, 234)  # Engrenagem
     pyautogui.sleep(1)
-    pyautogui.click(760, 381)  # Checkbox
+    pyautogui.click(835, 919)  # Botão Selecionar tudo
     pyautogui.sleep(1)
     pyautogui.click(1085, 924)  # Botão apagar
     pyautogui.sleep(1)
