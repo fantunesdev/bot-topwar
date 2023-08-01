@@ -45,7 +45,7 @@ def get_button_position(button_rgb: dict):
         target = [target[0], target[1]]
     except IndexError:
         print(f'As cores do botão {button_rgb["name"]} mudaram. Por favor obtenha as novas cores e tente de novo.')
-        exit(-1)
+        exit(3)
 
     return target
 
