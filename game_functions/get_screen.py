@@ -4,31 +4,19 @@ import pyautogui
 import pytesseract
 import re
 
+from config import favorite_rgb, rival_rgb, confirm_rgb
+
 # from game_functions.general_functions import get_cursor_position
 
 
 def save_relatory():
+    favorite_button_rgb = favorite_rgb
+    rival_button_rgb = rival_rgb
+    confirme_button_rgb = confirm_rgb
     pyautogui.sleep(1)
-    favorite_button_rgb = {
-        'r': 119,
-        'g': 226,
-        'b': 158,
-        'name': 'favorite'
-    }
-    rival_button_rgb = {
-        'r': 239,
-        'g': 67,
-        'b': 48,
-        'name': 'rival'
-    }
-    confirme_button_rgb = {
-        'r': 104,
-        'g': 146,
-        'b': 248,
-        'name': 'confirme'
-    }
     favorites_button_position = get_button_position(favorite_button_rgb)
     pyautogui.sleep(1)
+    print(favorites_button_position)
     pyautogui.click(favorites_button_position)
     pyautogui.sleep(1)
     rival_button_position = get_button_position(rival_button_rgb)
@@ -56,7 +44,7 @@ def get_button_position(button_rgb: dict):
     try:
         target = [target[0], target[1]]
     except IndexError:
-        print('As cores do botão mudaram. Por favor obtenha as novas cores e tente de novo.')
+        print(f'As cores do botão {button_rgb["name"]} mudaram. Por favor obtenha as novas cores e tente de novo.')
         exit(-1)
 
     return target

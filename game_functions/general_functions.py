@@ -4,7 +4,7 @@ import random
 
 import pyautogui
 
-from config import base_location
+from config import base_location, boss_rgb, favorite_rgb
 from game_functions import get_screen, handle_log
 
 buttons = {
@@ -147,11 +147,7 @@ def attack_dark_forces(vit):
 
 def attack_world_boss():
     pyautogui.sleep(2)
-    button_rgb = {
-        'r': 166,
-        'g': 91,
-        'b': 16
-    }
+    button_rgb = boss_rgb
     now = datetime.datetime.now()
     if now.hour in [1, 9, 17]:
         x, y = get_screen.get_button_position(button_rgb)
