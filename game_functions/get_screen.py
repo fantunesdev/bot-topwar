@@ -5,6 +5,7 @@ import pytesseract
 import re
 
 from config import favorite_rgb, rival_rgb, confirm_rgb
+from game_functions.general_functions import get_now
 
 # from game_functions.general_functions import get_cursor_position
 
@@ -16,7 +17,6 @@ def save_relatory():
     pyautogui.sleep(1)
     favorites_button_position = get_button_position(favorite_button_rgb)
     pyautogui.sleep(1)
-    print(favorites_button_position)
     pyautogui.click(favorites_button_position)
     pyautogui.sleep(1)
     rival_button_position = get_button_position(rival_button_rgb)
@@ -44,7 +44,7 @@ def get_button_position(button_rgb: dict):
     try:
         target = [target[0], target[1]]
     except IndexError:
-        print(f'As cores do botão {button_rgb["name"]} mudaram. Por favor obtenha as novas cores e tente de novo.')
+        print(f'As cores do botão {button_rgb["name"].upper()} mudaram. Por favor obtenha as novas cores e tente de novo.')
         exit(3)
 
     return target
@@ -100,26 +100,20 @@ def get_actual_vit():
     text = pure_text.split(' ')[-1]
     h, m, s = 0, 0, 0
     try:
-        try:
-            h = int(text.split('h')[0])
-        except ValueError:
-            print('Não foi possível obter as horas para o carregamento total de VIT. Setando o valor padrão: 0.')
-            h = 0
-        try:
-            m = int(text.split('h')[1].split('m')[0])
-        except ValueError:
-            print('Não foi possível obter os minutos para o carregamento total de VIT. Setando o valor padrão: 0.')
-            m = 0
-        try:
-            s = int(text.split('m')[-1].replace('s', ''))
-        except ValueError:
-            print('Não foi possível obter os segundos para o carregamento total de VIT. Setando o valor padrão: 0.')
-            s = 0
-    except IndexError:
-        pyautogui.click(1176, 114)  # Botão pra retornar à base
-        pyautogui.sleep(1)
-        pyautogui.click(1176, 114)
-        # get_actual_vit()
+        h = int(text.split('h')[0])
+    except ValueError:
+        print(f'{get_now()} - Não foi possível obter as HORAS para o carregamento total de VIT. Setando o valor padrão: 0.')
+        h = 0
+    try:
+        m = int(text.split('h')[1].split('m')[0])
+    except ValueError:
+        print(f'{get_now()} - Não foi possível obter os MINUTOS para o carregamento total de VIT. Setando o valor padrão: 0.')
+        m = 0
+    try:
+        s = int(text.split('m')[-1].replace('s', ''))
+    except ValueError:
+        print(f'{get_now()} - Não foi possível obter os SEGUNDOS para o carregamento total de VIT. Setando o valor padrão: 0.')
+        s = 0
 
     # calculando vit disponível
     vit_recharge_time = 345

@@ -88,21 +88,24 @@ def free_gem(clicks: int):
 
 def handle_attack_dark_forces(recharges: int):
     pyautogui.sleep(2)
-    print(f'Iniciando ataque com {recharges} recargas.')
-    vit = get_screen.get_actual_vit()
+    print(f'{get_now()} - Iniciando ataque com {recharges} recargas.')
     if recharges == 0:
-        attack_dark_forces(vit)
+        vit = get_screen.get_actual_vit()
+        if vit > 25:
+            attack_dark_forces(vit)
+        else:
+            print(f'{get_now()} - Não há VIT suficiente para fazer o ataque sem recargas: {vit}.')
     else:
         for i in range(recharges):
+            vit = get_screen.get_actual_vit()
             if vit < 25:
                 add_vit_value = 50
-                print(f'A VIT acabou. Fazendo a recarga {i}.')
+                print(f'{get_now()} - Não há VIT suficiente. Fazendo a {i + 1}ª recarga.')
                 restore_vit(add_vit_value)
-                vit += add_vit_value
+                pyautogui.sleep(1)
                 pyautogui.click(1705, 350)
-                print(f'VIT disponível: {vit}.')
-            attack_dark_forces(vit) 
-    print('Fim do ataque.')
+            attack_dark_forces(vit)
+    print(f'{get_now()} - Fim do ataque.')
 
 
 def attack_dark_forces(vit):
@@ -121,13 +124,12 @@ def attack_dark_forces(vit):
         pyautogui.sleep(1)
         pyautogui.click(buttons['center'])
         pyautogui.sleep(1)
-        print('teste')
         get_screen.save_relatory()
         pyautogui.sleep(1)
         x, y = get_screen.get_relatory()
         pyautogui.sleep(1)
         time = calculate_time(x, y, 'darkforces')
-        print(f'O tempo de marcha é de {time} segundos.')
+        print(f'{get_now()} - O tempo de marcha é de {time} segundos.')
         pyautogui.click(buttons['center'])
         pyautogui.sleep(1)
         pyautogui.click(buttons['5_attack'])
@@ -138,7 +140,7 @@ def attack_dark_forces(vit):
         pyautogui.sleep(240 + (time * 2) + 2)
 
         vit = get_screen.get_actual_vit()
-        print(f'VIT disponível: {vit}.')
+        print(f'{get_now()} - VIT disponível: {vit}.')
 
         counter += 1
         if vit < 25:
@@ -152,7 +154,7 @@ def attack_world_boss():
     if now.hour in [1, 9, 17]:
         x, y = get_screen.get_button_position(button_rgb)
     else:
-        print('Fora do horário do evento do chefão. Encerrando.')
+        print(f'{get_now()} - Fora do horário do evento do chefão. Encerrando.')
         exit(62)
     pyautogui.click(x, y)  # worldboss button position
     pyautogui.sleep(1)
@@ -165,7 +167,7 @@ def attack_world_boss():
     x, y = get_screen.get_relatory()
     pyautogui.sleep(1)
     time = calculate_time(x, y, 'boss')
-    print(f'O tempo de marcha é de {time} segundos.')
+    print(f'{get_now()} - O tempo de marcha é de {time} segundos.')
     for i in range(0, 5):
         pyautogui.click(buttons['center'])
         pyautogui.sleep(1)
@@ -248,13 +250,12 @@ def attack_warhammer():
 
 
 def restore_vit(portion: int):
-    print(f'Tamanho da recarga: {portion}.')
+    print(f'{get_now()} - Recarregando {portion} de VIT.')
     if portion in (10, 50):
         portion_button = {
             '10': (825, 632),
             '50': (965, 632)
         }
-        print(f'Recarregando {portion} de VIT.')
         pyautogui.sleep(1)
         pyautogui.click(222, 150)
         pyautogui.sleep(1)
@@ -305,3 +306,26 @@ def calculate_time(x: int, y: int, target: str):
     time = math.ceil(distance / velocity)
 
     return time
+
+
+def get_now():
+    now = datetime.datetime.now()
+    return now.strftime('%Y-%m-%d %H:%M:%S')
+
+
+
+def handle_auto_join(value: bool):
+    pyautogui.sleep(2)
+    pyautogui.click(1862, 756)  # Botão da aliança
+    pyautogui.sleep(1)
+    pyautogui.click(865, 863)  # Botão Batalhas
+    pyautogui.sleep(1)
+    pyautogui.click(1087, 952)  # Botão Participar
+    pyautogui.sleep(1)
+    if value == True:
+        pyautogui.click(885, 919)  # Botão Aberto
+    else:
+        pyautogui.click(1104, 919)  # Botão Fechado
+    for i in range(3):
+        pyautogui.sleep(1)
+        pyautogui.click(733, 152)  # Click para sair da janela.

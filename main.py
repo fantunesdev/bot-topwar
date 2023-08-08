@@ -53,7 +53,7 @@ try:
         clicks = int(param2)
         general_functions.free_gem(clicks)
     elif param1 == 'dev':
-        ...
+        pass
     elif param1 == 'cursor':
         general_functions.get_cursor_position()
     else:
