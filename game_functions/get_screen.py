@@ -5,7 +5,7 @@ import pytesseract
 import re
 
 from config import favorite_rgb, rival_rgb, confirm_rgb
-from game_functions.general_functions import get_now
+from game_functions import general_functions
 
 # from game_functions.general_functions import get_cursor_position
 
@@ -102,17 +102,17 @@ def get_actual_vit():
     try:
         h = int(text.split('h')[0])
     except ValueError:
-        print(f'{get_now()} - Não foi possível obter as HORAS para o carregamento total de VIT. Setando o valor padrão: 0.')
+        print(f'{general_functions.get_now()} - Não foi possível obter as HORAS para o carregamento total de VIT. Setando o valor padrão: 0.')
         h = 0
     try:
         m = int(text.split('h')[1].split('m')[0])
-    except ValueError:
-        print(f'{get_now()} - Não foi possível obter os MINUTOS para o carregamento total de VIT. Setando o valor padrão: 0.')
+    except IndexError:
+        print(f'{general_functions.get_now()} - Não foi possível obter os MINUTOS para o carregamento total de VIT. Setando o valor padrão: 0.')
         m = 0
     try:
         s = int(text.split('m')[-1].replace('s', ''))
     except ValueError:
-        print(f'{get_now()} - Não foi possível obter os SEGUNDOS para o carregamento total de VIT. Setando o valor padrão: 0.')
+        print(f'{general_functions.get_now()} - Não foi possível obter os SEGUNDOS para o carregamento total de VIT. Setando o valor padrão: 0.')
         s = 0
 
     # calculando vit disponível
